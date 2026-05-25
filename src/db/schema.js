@@ -1,4 +1,4 @@
-import { pgEnum, pgTable, serial, text, timestamp, integer, jsonb } from 'drizzle-orm/pg-core';
+import { pgEnum, pgTable, serial, text, timestamp, integer, jsonb, index } from 'drizzle-orm/pg-core';
 
 // Enum for match status (database name: match_status)
 export const matchStatus = pgEnum('match_status', ['scheduled', 'live', 'finished']);
@@ -32,4 +32,6 @@ export const commentary = pgTable('commentary', {
   metadata: jsonb('metadata'),
   tags: text('tags'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-});
+}, (table) => ({
+  matchIdIdx: index('commentary_match_id_idx').on(table.matchId),
+}));
