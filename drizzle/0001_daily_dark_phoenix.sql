@@ -27,5 +27,5 @@ CREATE TABLE "matches" (
 	"created_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
-DROP TABLE "demo_users" CASCADE;--> statement-breakpoint
+DROP TABLE IF EXISTS "demo_users";--> statement-breakpoint
 ALTER TABLE "commentary" ADD CONSTRAINT "commentary_match_id_matches_id_fk" FOREIGN KEY ("match_id") REFERENCES "public"."matches"("id") ON DELETE no action ON UPDATE no action;
